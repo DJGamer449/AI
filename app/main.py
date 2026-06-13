@@ -27,7 +27,7 @@ class Message(BaseModel):
 
 class ChatRequest(BaseModel):
     model: str = Field(min_length=1)
-    max_tokens: int = Field(default=1024, ge=1, le=8192)
+    max_tokens: int = Field(default=100024, ge=1, le=8192)
     messages: List[Message] = Field(min_length=1)
 
 
