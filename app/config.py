@@ -1,7 +1,7 @@
 from functools import lru_cache
 from typing import List
 
-from pydantic import Field, field_validator
+from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -18,18 +18,13 @@ class Settings(BaseSettings):
         default="https://api.orbit-provider.com/api/provider/agy/v1", alias="ORBIT_BASE_URL"
     )
     session_ttl_seconds: int = Field(default=60 * 60 * 24, alias="SESSION_TTL_SECONDS")
-    cors_origins: List[str] = Field(default_factory=list, alias="CORS_ORIGINS")
+    cors_origins_raw: str = Field(default="", alias="CORS_ORIGINS")
     request_timeout_seconds: float = Field(default=60.0, alias="REQUEST_TIMEOUT_SECONDS")
     cookie_secure: bool = Field(default=False, alias="COOKIE_SECURE")
 
-    @field_validator("cors_origins", mode="before")
-    @classmethod
-    def parse_cors_origins(cls, value):
-        if value is None or value == "":
-            return []
-        if isinstance(value, str):
-            return [origin.strip() for origin in value.split(",") if origin.strip()]
-        return value
+    @property
+    def cors_origins(self) -> List[str]:
+        return [origin.strip() for origin in self.cors_origins_raw.split(",") if origin.strip()]
 
     @property
     def signing_secret(self) -> str:
