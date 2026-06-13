@@ -21,28 +21,43 @@
     </form>
   </div>
 
-  <main class="mx-auto flex min-h-screen max-w-7xl flex-col p-3 lg:p-6">
-    <header class="mb-4 flex flex-col gap-3 rounded-3xl border border-white/10 bg-white/10 p-4 shadow-xl backdrop-blur md:flex-row md:items-center md:justify-between">
-      <div>
-        <p class="text-xs uppercase tracking-[0.3em] text-cyan-200">Secure Orbit Proxy</p>
-        <h1 class="text-2xl font-bold md:text-3xl">MelanTrance's Private Unlimited AI</h1>
+  <main class="mx-auto grid min-h-screen max-w-7xl gap-4 p-3 lg:grid-cols-[18rem_1fr] lg:p-6">
+    <aside class="flex min-h-0 flex-col rounded-3xl border border-white/10 bg-white/10 p-4 shadow-xl backdrop-blur">
+      <div class="flex items-center justify-between gap-3">
+        <div>
+          <p class="text-xs uppercase tracking-[0.25em] text-cyan-200">History</p>
+          <h2 class="font-semibold">Chat sessions</h2>
+        </div>
+        <button id="newChat" class="rounded-2xl bg-cyan-300 px-3 py-2 text-sm font-bold text-slate-950 hover:bg-cyan-200">New</button>
       </div>
-      <div class="flex flex-col gap-2 sm:flex-row sm:items-center">
-        <select id="modelSelect" class="min-w-64 rounded-2xl border border-white/10 bg-slate-950/70 px-4 py-3 text-sm outline-none focus:ring-4 focus:ring-cyan-400/30"></select>
-        <button id="refreshModels" class="rounded-2xl border border-white/10 px-4 py-3 text-sm hover:bg-white/10">Refresh</button>
-        <button id="logout" class="rounded-2xl bg-white/10 px-4 py-3 text-sm hover:bg-white/20">Logout</button>
-      </div>
-    </header>
+      <div id="sessionList" class="mt-4 flex-1 space-y-2 overflow-y-auto pr-1"></div>
+      <p class="mt-4 text-xs text-slate-400">History is stored locally in this browser. Delete any session with the trash button.</p>
+    </aside>
 
-    <section id="messages" class="flex-1 space-y-4 overflow-y-auto rounded-3xl border border-white/10 bg-slate-950/40 p-4 shadow-2xl backdrop-blur"></section>
+    <section class="flex min-h-0 flex-col">
+      <header class="mb-4 flex flex-col gap-3 rounded-3xl border border-white/10 bg-white/10 p-4 shadow-xl backdrop-blur md:flex-row md:items-center md:justify-between">
+        <div>
+          <p class="text-xs uppercase tracking-[0.3em] text-cyan-200">Secure Orbit Proxy</p>
+          <h1 id="sessionTitle" class="text-2xl font-bold md:text-3xl">MelanTrance's Private Unlimited AI</h1>
+        </div>
+        <div class="flex flex-col gap-2 sm:flex-row sm:items-center">
+          <select id="modelSelect" class="min-w-64 rounded-2xl border border-white/10 bg-slate-950/70 px-4 py-3 text-sm outline-none focus:ring-4 focus:ring-cyan-400/30"></select>
+          <button id="refreshModels" class="rounded-2xl border border-white/10 px-4 py-3 text-sm hover:bg-white/10">Refresh</button>
+          <button id="deleteChat" class="rounded-2xl border border-red-300/30 px-4 py-3 text-sm text-red-100 hover:bg-red-500/20">Delete chat</button>
+          <button id="logout" class="rounded-2xl bg-white/10 px-4 py-3 text-sm hover:bg-white/20">Logout</button>
+        </div>
+      </header>
 
-    <form id="chatForm" class="mt-4 rounded-3xl border border-white/10 bg-white/10 p-3 shadow-xl backdrop-blur">
-      <div class="flex gap-3">
-        <textarea id="prompt" rows="1" placeholder="Message your private AI..." class="max-h-48 flex-1 resize-none rounded-2xl border border-white/10 bg-slate-950/70 px-4 py-3 outline-none focus:ring-4 focus:ring-cyan-400/30"></textarea>
-        <button id="send" class="rounded-2xl bg-gradient-to-r from-cyan-300 to-blue-400 px-6 font-bold text-slate-950 transition hover:scale-[1.02] disabled:cursor-not-allowed disabled:opacity-50">Send</button>
-      </div>
-      <p class="px-2 pt-2 text-xs text-slate-400">Your API key stays on the server. Conversations are sent only through the authenticated backend proxy.</p>
-    </form>
+      <section id="messages" class="min-h-[50vh] flex-1 space-y-4 overflow-y-auto rounded-3xl border border-white/10 bg-slate-950/40 p-4 shadow-2xl backdrop-blur"></section>
+
+      <form id="chatForm" class="mt-4 rounded-3xl border border-white/10 bg-white/10 p-3 shadow-xl backdrop-blur">
+        <div class="flex gap-3">
+          <textarea id="prompt" rows="1" placeholder="Message your private AI..." class="max-h-48 flex-1 resize-none rounded-2xl border border-white/10 bg-slate-950/70 px-4 py-3 outline-none focus:ring-4 focus:ring-cyan-400/30"></textarea>
+          <button id="send" class="rounded-2xl bg-gradient-to-r from-cyan-300 to-blue-400 px-6 font-bold text-slate-950 transition hover:scale-[1.02] disabled:cursor-not-allowed disabled:opacity-50">Send</button>
+        </div>
+        <p class="px-2 pt-2 text-xs text-slate-400">Your API key stays on the server. Conversations are sent only through the authenticated backend proxy.</p>
+      </form>
+    </section>
   </main>
 
   <script src="/assets/app.js"></script>

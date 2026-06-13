@@ -1,10 +1,11 @@
 # MelanTrance's Private Unlimited AI
 
-A private, password-protected AI chat web app with a FastAPI backend proxy for Orbit Provider and a responsive Tailwind-powered SPA frontend.
+A private, password-protected AI chat web app with a FastAPI backend proxy for Orbit Provider, a responsive Tailwind-powered SPA frontend, and local browser chat-session history.
 
 ## Security model
 
 - The browser never receives the Orbit API key.
+- Chat sessions are stored locally in the user's browser and can be deleted one-by-one from the UI.
 - `APP_PASSWORD` unlocks the UI and creates an HTTP-only signed session cookie.
 - `/api/models` and `/api/chat` are blocked unless the signed cookie is valid.
 - Store secrets in environment variables; do not commit `.env`.
